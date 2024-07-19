@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import CashFlowMain from "@/app/finance/cashflow/CashFlowMain";
 
-export default function CashFlow() {
+function CashFlow() {
     return (
         <>
             <div className="flex flex-col min-h-screen bg-slate-100 shadow-md sm:rounded-lg">
@@ -20,3 +20,5 @@ export default function CashFlow() {
         </>
     );
 }
+
+export default CashFlow;

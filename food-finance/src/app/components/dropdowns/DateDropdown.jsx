@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-function Dropdown({ data, title, onShowCalendar }) {
+function DateDropdown({ data, title, onShowCalendar, onHideCalendar }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
@@ -13,6 +13,8 @@ function Dropdown({ data, title, onShowCalendar }) {
 
         if (item === "Custom...") {
             onShowCalendar();
+        } else {
+          onHideCalendar();
         }
     };
 
@@ -34,7 +36,7 @@ function Dropdown({ data, title, onShowCalendar }) {
     <div className="relative inline-block" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 text-gray-500 rounded-md focus:outline-none hover:text-gray-600 min-w-40 max-w-48"
+        className="px-4 py-2 mx-2 text-gray-500 rounded-md focus:outline-none hover:text-gray-600 min-w-40 max-w-48"
       >
         {title == null ? selectedItem || data[0] : selectedItem || title}
         <svg
@@ -56,7 +58,7 @@ function Dropdown({ data, title, onShowCalendar }) {
             item == "Custom..."   ?
                 <div
                     key={index}
-                    className="px-4 py-2 border-t border-t-gray-200 x-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                    className="px-4 py-2 border-t border-t-gray-200 x-4 hover:bg-gray-100 cursor-pointer text-gray-700"
                     onClick={() => handleItemClick(item)}
                 >
                         {item}
@@ -76,4 +78,4 @@ function Dropdown({ data, title, onShowCalendar }) {
   );
 }
 
-export default Dropdown;
+export default DateDropdown;

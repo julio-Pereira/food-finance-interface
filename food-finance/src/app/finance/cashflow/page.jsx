@@ -6,18 +6,16 @@ import CashFlowMain from "@/app/finance/cashflow/CashFlowMain";
 
 function CashFlow() {
     return (
-        <>
-            <div className="flex flex-col min-h-screen bg-slate-100 shadow-md sm:rounded-lg">
-                <Header />
-                <div className="flex flex-1">
-                    <Sidebar data={sidebarData} />
-                    <div className="flex-1">
-                        <CashFlowMain data={data} />
-                    </div>
+        <div className="flex flex-col min-h-screen bg-slate-100 shadow-md sm:rounded-lg">
+            <Header />
+            <div className="flex flex-1 flex-col lg:flex-row">
+                <Sidebar data={sidebarData} className="w-full lg:w-1/4" />
+                <div className="flex-1">
+                    <CashFlowMain data={data} />
                 </div>
-                <Footer />
             </div>
-        </>
+            <Footer />
+        </div>
     );
 }
 

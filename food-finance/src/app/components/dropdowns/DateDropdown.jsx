@@ -33,10 +33,10 @@ function DateDropdown({ data, title, onShowCalendar, onHideCalendar }) {
     }, []);
 
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
+    <div className="relative inline-block min-w-52" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 mx-2 text-gray-500 rounded-md focus:outline-none hover:text-gray-600 min-w-40 max-w-48"
+        className="px-4 py-2 mx-2 text-gray-500 rounded-md focus:outline-none hover:text-gray-600 min-w-40 max-w-60"
       >
         {title == null ? selectedItem || data[0] : selectedItem || title}
         <svg
@@ -65,9 +65,9 @@ function DateDropdown({ data, title, onShowCalendar, onHideCalendar }) {
                 </div>
             :
                 <div
-                key={index}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                onClick={() => handleItemClick(item)}
+                  key={index}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                  onClick={() => handleItemClick(item)}
                 >
                     {item}
                 </div>

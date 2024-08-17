@@ -31,42 +31,45 @@ export const sidebarData = [
         "title": 'Financeiro',
         "subTitles": [
             {
-                'section': 'Dashboard'
+                'section': 'Dashboard',
+                'endpoint': '/finance/dashboard'
             },
             {
-                'section': 'Fluxo de Caixa'
+                'section': 'Fluxo de Caixa',
+                'endpoint': '/finance/cashflow'
             },
             {
-                'section': 'Contas a Pagar'
+                'section': 'Movimentação Financeira',
+                'endpoint': '/finance/financialmovement'
             },
             {
-                'section': 'Contas a Receber'
+                'section': 'Relatórios',
+                'endpoint': '/finance/report'
             },
-            {
-                'section': 'Relatórios'
-            },
-            {
-                'section': 'Configurações'
-            }
         ]
     },
     {
         "title": 'Recursos Humanos',
         "subTitles": [
             {
-                'section': 'Dashboard'
+                'section': 'Dashboard',
+                'endpoint': '/hr/dashboard'
             },
             {
-                'section': 'Gestão de Equipe'
+                'section': 'Gestão de Equipe',
+                'endpoint': '/hr/team-management'
             },
             {
-                'section': 'Folha de Pagamento'
+                'section': 'Folha de Pagamento',
+                'endpoint': '/hr/payroll'
             },
             {
-                'section': 'Gorjetas'
+                'section': 'Gorjetas',
+                'endpoint': '/hr/tips'
             },
             {
-                'section': 'Relatórios'
+                'section': 'Relatórios',
+                'endpoint': '/hr/reports'
             }
         ]
     }

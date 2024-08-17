@@ -1,13 +1,13 @@
 'use client';
-import React, { useEffect, useState, useRef } from "react";
-import Table from "../../components/table/Table";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import CashFlowTable from "../../components/table/CashFlowTable";
 import SearchInput from "@/app/components/inputs/searchInput/SearchInput";
 import DateDropdown from "@/app/components/dropdowns/DateDropdown";
-import { months } from "@/mockData";
+import data, { months } from "@/mockData";
 import DateInput from "@/app/components/inputs/searchInput/DateInput";
 import DateButton from "@/app/components/buttons/DateButton";
 
-function CashFlowMain({ data }) {
+function CashFlowMain() {
   const [showCalendar, setShowCalendar] = useState(false);
   const calendarRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -57,7 +57,7 @@ function CashFlowMain({ data }) {
           </div>
         </div>
         <div className="w-full overflow-x-auto">
-          <Table data={data} />
+          <CashFlowTable data={data} />
         </div>
       </div>
     </section>

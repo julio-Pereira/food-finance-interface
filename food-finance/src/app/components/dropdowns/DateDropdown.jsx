@@ -1,36 +1,36 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 function DateDropdown({ data, title, onShowCalendar, onHideCalendar }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const dropdownRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const dropdownRef = useRef(null);
 
-    const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-        setIsOpen(false);
+  const handleItemClick = (item) => {
+      setSelectedItem(item);
+      setIsOpen(false);
 
-        if (item === "Custom...") {
-            onShowCalendar();
-        } else {
-          onHideCalendar();
-        }
-    };
+      if (item === "Custom...") {
+          onShowCalendar();
+      } else {
+        onHideCalendar();
+      }
+  };
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+  useEffect(() => {
+      const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+              setIsOpen(false);
+          }
+      };
 
-        document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+      return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+      };
+  }, []);
 
   return (
     <div className="relative inline-block min-w-52" ref={dropdownRef}>
@@ -61,7 +61,7 @@ function DateDropdown({ data, title, onShowCalendar, onHideCalendar }) {
                     className="px-4 py-2 border-t border-t-gray-200 x-4 hover:bg-gray-100 cursor-pointer text-gray-700"
                     onClick={() => handleItemClick(item)}
                 >
-                        {item}
+                  {item}
                 </div>
             :
                 <div

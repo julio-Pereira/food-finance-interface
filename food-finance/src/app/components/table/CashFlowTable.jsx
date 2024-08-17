@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import Loading from "../loading/Loading";
 import DateInput from "../inputs/searchInput/DateInput";
 
-export default function Table({ data }) {
+export default function CashFlowTable({ data }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectAll, setSelectAll] = useState(false);
@@ -14,6 +17,8 @@ export default function Table({ data }) {
   const [newRow, setNewRow] = useState(null);
   const [editingRow, setEditingRow] = useState(null);
   const [enableScroll, setEnableScroll] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,24 +80,6 @@ export default function Table({ data }) {
       </svg>
     ) : null;
 
-  const addNewRow = () => {
-    const newRowTemplate = {
-      id: uuidv4(),
-      "Data Vencimento": '',
-      "Data Emissão": '',
-      "Plano de contas (Nível III)": '',
-      "Descrição": '',
-      "Favorecido": '',
-      "Tipo Pagamento": '',
-      "Centro de Custo": '',
-      "Conta Bancária": '',
-      "Status": '',
-      "Total": ''
-    };
-
-    setNewRow(newRowTemplate);
-  };
-
   const handleNewRowChange = (e, key) => {
     const newValue = e.target.value;
     setNewRow((prevNewRow) => ({
@@ -130,6 +117,10 @@ export default function Table({ data }) {
   const removeRow = (rowId) => {
     setTableData((prevTableData) => prevTableData.filter((row) => row.id !== rowId));
     setSelectedRows((prevSelectedRows) => prevSelectedRows.filter((id) => id !== rowId));
+  };
+
+  const handleRedirect = () => {
+    router.push('/finance/financialmovement');
   };
 
   if (!data || data.length === 0) {
@@ -230,7 +221,7 @@ export default function Table({ data }) {
           )}
         </tbody>
       </table>
-      <button onClick={addNewRow} className="bg-blue-500 text-white rounded-xl w-16 h-10 mt-2 flex justify-center">
+      <button onClick={handleRedirect} className="bg-blue-500 text-white rounded-xl w-16 h-10 mt-2 flex justify-center">
         <img src="/add-circle-solid-svgrepo-com.svg" alt="Add new row" className="my-2"/>
       </button>
     </div>

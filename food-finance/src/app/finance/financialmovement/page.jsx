@@ -3,7 +3,7 @@ import NewFinancialMovementForm from "@/app/components/forms/NewFinancialMovemen
 import Header from "@/app/components/header/Header";
 import Sidebar from "@/app/components/sidebar/Sidebar";
 import Footer from "@/app/components/footer/Footer";
-import { sidebarData } from "../../../../mockData";
+import { sidebarData } from "../../../mockData";
 
 function FinancialMovementPage() {
   return (

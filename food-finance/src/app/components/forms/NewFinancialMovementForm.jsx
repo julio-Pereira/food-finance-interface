@@ -1,6 +1,6 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import DateInput from '../inputs/searchInput/DateInput';
-import ChartAccountsDropdown from '../dropdowns/ChartAccountsDropdown';
+import DataDropdown from '../dropdowns/DataDropdown';
 import { planoContas, favorecidos } from '@/mockData';
 import TableDataContext from '@/app/context/TableDataContext';
 
@@ -35,53 +35,6 @@ function NewFinancialMovementForm() {
     });
 
     const { setTableData } = useContext(TableDataContext);
-
-    const emissionDateRef = useRef(null);
-    const dueDateRef = useRef(null);
-    const beneficiaryRef = useRef(null);
-    const accountPlanRef = useRef(null);
-    const paymentTypeRef = useRef(null);
-    const costCenterRef = useRef(null);
-    const bankAccountRef = useRef(null);
-    const statusRef = useRef(null);
-    const amountRef = useRef(null);
-    const descriptionRef = useRef(null);
-
-    useEffect(() => {
-        if (emissionDate) dueDateRef.current?.focus();
-    }, [emissionDate]);
-
-    useEffect(() => {
-        if (dueDate) beneficiaryRef.current?.focus();
-    }, [dueDate]);
-
-    useEffect(() => {
-        if (beneficiary) accountPlanRef.current?.focus();
-    }, [beneficiary]);
-
-    useEffect(() => {
-        if (accountPlan) paymentTypeRef.current?.focus();
-    }, [accountPlan]);
-
-    useEffect(() => {
-        if (paymentType) costCenterRef.current?.focus();
-    }, [paymentType]);
-
-    useEffect(() => {
-        if (costCenter) bankAccountRef.current?.focus();
-    }, [costCenter]);
-
-    useEffect(() => {
-        if (bankAccount) statusRef.current?.focus();
-    }, [bankAccount]);
-
-    useEffect(() => {
-        if (status) amountRef.current?.focus();
-    }, [status]);
-
-    useEffect(() => {
-        if (amount) descriptionRef.current?.focus();
-    }, [amount]);
 
     const extractNivel3Contas = (planoContas) => {
         const result = [];
@@ -242,120 +195,112 @@ function NewFinancialMovementForm() {
                     className={`rounded-md px-2 py-1 mx-2 w-96 bg-white bg-gray-100 ${mandatoryFields.balance ? 'border border-red-500' : ''}`}
                 />
             </div>
-            <form onSubmit={handleSubmit} className="grid-flow-row w-1/2">
-                <div className="grid grid-flow-col px-2 my-2 w-1/2">
-                    <label className="text-black justify-start">
-                        Emissão:
-                        <DateInput
-                            ref={emissionDateRef}
-                            value={emissionDate}
-                            onChange={setEmissionDate}
-                            className={mandatoryFields.emissionDate ? 'border border-red-500' : ''}
-                        />
-                    </label>
-                    <label className="text-black justify-center">
-                        Vencimento:
-                        <DateInput
-                            ref={dueDateRef}
-                            value={dueDate}
-                            onChange={setDueDate}
-                            className={mandatoryFields.dueDate ? 'border border-red-500' : ''}
-                        />
-                    </label>
-                </div>
-                <div className="grid grid-flow-row px-2 my-2 w-auto justify-between">
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Favorecido:
-                        <ChartAccountsDropdown
-                            ref={beneficiaryRef}
-                            data={favorecidos}
-                            value={beneficiary}
-                            onChange={handleInputChange(setBeneficiary, 'beneficiary')}
-                            mandatory={mandatoryFields.beneficiary}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Plano de Contas:
-                        <ChartAccountsDropdown
-                            ref={accountPlanRef}
-                            data={level3}
-                            value={accountPlan}
-                            onChange={handleInputChange(setAccountPlan, 'accountPlan')}
-                            mandatory={mandatoryFields.accountPlan}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Tipo de Pagamento:
-                        <ChartAccountsDropdown
-                            ref={paymentTypeRef}
-                            data={['Boleto', 'Cartão de Crédito', 'Dinheiro', 'Transferência']}
-                            value={paymentType}
-                            onChange={handleInputChange(setPaymentType, 'paymentType')}
-                            mandatory={mandatoryFields.paymentType}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Centro de Custo:
-                        <ChartAccountsDropdown
-                            ref={costCenterRef}
-                            data={['Loja 1', 'Loja 2', 'Loja 3', 'Loja 4']}
-                            value={costCenter}
-                            onChange={handleInputChange(setCostCenter, 'costCenter')}
-                            mandatory={mandatoryFields.costCenter}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Conta Bancária:
-                        <ChartAccountsDropdown
-                            ref={bankAccountRef}
-                            data={['Bank 1', 'Bank 2', 'Bank 3', 'Bank 4']}
-                            value={bankAccount}
-                            onChange={handleInputChange(setBankAccount, 'bankAccount')}
-                            mandatory={mandatoryFields.bankAccount}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Status:
-                        <ChartAccountsDropdown
-                            ref={statusRef}
-                            data={['Em aberto', 'Pago', 'Inadimplente']}
-                            value={status}
-                            onChange={handleInputChange(setStatus, 'status')}
-                            mandatory={mandatoryFields.status}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Total:
-                        <input
-                            ref={amountRef}
-                            type="text"
-                            value={amount}
-                            placeholder='R$ 0,00'
-                            onChange={handleAmountChange}
-                            className={`rounded-md px-2 py-1 mx-4 w-96 justify-end ${mandatoryFields.amount ? 'border border-red-500' : ''}`}
-                        />
-                    </label>
-                    <label className="text-black flex justify-between px-2 my-2">
-                        Descrição:
-                        <input
-                            ref={descriptionRef}
-                            type="text"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            className="rounded-md px-2 py-1 mx-4 w-96 justify-end"
-                        />
-                    </label>
-                </div>
-                <div className="flex justify-center">
-                    <button
-                        className="text-white border rounded-lg bg-blue-600 px-4 py-2"
-                        type="submit"
-                        disabled={isFormDisabled}
-                    >
-                        Incluir movimento
-                    </button>
-                </div>
-            </form>
+            <div className="grid grid-flow-col bg-slate-100 border border-gray-200 rounded-md w-1/2 py-2 shadow-md">
+                <form onSubmit={handleSubmit} className="grid-flow-row px-2">
+                    <div className="grid grid-flow-col my-2 mx-2 w-1/2">
+                        <label className="text-black justify-start">
+                            Emissão:
+                            <DateInput
+                                value={emissionDate}
+                                onChange={setEmissionDate}
+                                className={mandatoryFields.emissionDate ? 'border border-red-500' : ''}
+                            />
+                        </label>
+                        <label className="text-black justify-center">
+                            Vencimento:
+                            <DateInput
+                                value={dueDate}
+                                onChange={setDueDate}
+                                className={mandatoryFields.dueDate ? 'border border-red-500' : ''}
+                            />
+                        </label>
+                    </div>
+                    <div className="grid grid-flow-row px-2 my-2 w-auto justify-between">
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Favorecido:
+                            <DataDropdown
+                                data={favorecidos}
+                                value={beneficiary}
+                                onChange={handleInputChange(setBeneficiary, 'beneficiary')}
+                                mandatory={mandatoryFields.beneficiary}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Plano de Contas:
+                            <DataDropdown
+                                data={level3}
+                                value={accountPlan}
+                                onChange={handleInputChange(setAccountPlan, 'accountPlan')}
+                                mandatory={mandatoryFields.accountPlan}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Tipo de Pagamento:
+                            <DataDropdown
+                                data={['Boleto', 'Cartão de Crédito', 'Dinheiro', 'Transferência']}
+                                value={paymentType}
+                                onChange={handleInputChange(setPaymentType, 'paymentType')}
+                                mandatory={mandatoryFields.paymentType}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Centro de Custo:
+                            <DataDropdown
+                                data={['Loja 1', 'Loja 2', 'Loja 3', 'Loja 4']}
+                                value={costCenter}
+                                onChange={handleInputChange(setCostCenter, 'costCenter')}
+                                mandatory={mandatoryFields.costCenter}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Conta Bancária:
+                            <DataDropdown
+                                data={['Bank 1', 'Bank 2', 'Bank 3', 'Bank 4']}
+                                value={bankAccount}
+                                onChange={handleInputChange(setBankAccount, 'bankAccount')}
+                                mandatory={mandatoryFields.bankAccount}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Status:
+                            <DataDropdown
+                                data={['Em aberto', 'Pago', 'Inadimplente']}
+                                value={status}
+                                onChange={handleInputChange(setStatus, 'status')}
+                                mandatory={mandatoryFields.status}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Total:
+                            <input
+                                type="text"
+                                value={amount}
+                                placeholder='R$ 0,00'
+                                onChange={handleAmountChange}
+                                className={`rounded-md px-4 py-1 mx-1 w-96 justify-end ${mandatoryFields.amount ? 'border border-red-500' : ''}`}
+                            />
+                        </label>
+                        <label className="text-black flex justify-between px-2 my-2">
+                            Descrição:
+                            <textarea
+                                type="text"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                className="resize-none rounded-md px-2 py-1 mx-1 w-96 justify-end"
+                            ></textarea>
+                        </label>
+                    </div>
+                    <div className="flex justify-center">
+                        <button
+                            className="text-white border rounded-lg bg-blue-600 px-4 py-2"
+                            type="submit"
+                            disabled={isFormDisabled}
+                        >
+                            Incluir movimento
+                        </button>
+                    </div>
+                </form>
+            </div>
             <div className="mt-4">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead>

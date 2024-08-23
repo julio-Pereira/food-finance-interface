@@ -222,7 +222,7 @@ export default function CashFlowTable({ data }) {
         </tbody>
       </table>
       <button onClick={handleRedirect} className="bg-blue-500 text-white rounded-xl w-16 h-10 mt-2 flex justify-center">
-        <img src="/add-circle-solid-svgrepo-com.svg" alt="Add new row" className="my-2"/>
+        <img src="/add-circle-solid-svgrepo-com.svg" alt="Add new finance movement" className="my-2"/>
       </button>
     </div>
   );
